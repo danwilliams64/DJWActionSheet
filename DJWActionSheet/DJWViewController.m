@@ -35,7 +35,7 @@
 - (IBAction)showActionSheetButtonTapped:(id)sender
 {
     [DJWActionSheet showInView:self.view
-                     withTitle:nil
+                     withTitle:@"@thatgamecompany is not blocked."
              cancelButtonTitle:@"Cancel"
         destructiveButtonTitle:@"Delete"
              otherButtonTitles:@[@"View Replies", @"View Favourites", @"Report Spam"]

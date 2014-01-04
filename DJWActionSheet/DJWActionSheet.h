@@ -24,9 +24,3 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
           tapBlock:(DJWActionSheetCompletionBlock)tapBlock;
 
 @end
-
-@interface UIButton (BackgroundColorForState)
-
-- (void)setBackgroundColor:(UIColor *)backgroundColor forState:(UIControlState)state;
-
-@end

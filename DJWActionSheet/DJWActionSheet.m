@@ -12,17 +12,21 @@
 #define kDJWActionSheetVerticalElementMargin                    5.0
 #define kDJWActionSheetToplMargin                               10.0
 
+#define kDJWActionSheetTitleBackgroundColor                     [UIColor colorWithRed:0.961 green:0.961 blue:0.961 alpha:1]
+#define kDJWActionSheetTitleFont                                [UIFont systemFontOfSize:14.0]
+
 #define kDJWActionSheetButtonTextColorNormalState               [UIColor blackColor]
 #define kDJWActionSheetButtonTextColorHighlightedState          [UIColor whiteColor]
 #define kDJWActionSheetButtonBackgroundColorNormal              [UIColor whiteColor]
 #define kDJWActionSheetButtonBackgroundColorHighlighted         [UIColor colorWithRed:0.000 green:0.490 blue:0.965 alpha:1]
 
-#define kDJWActionSheetButtonDividerColor                       [UIColor lightGrayColor]
+#define kDJWActionSheetButtonDividerColor                       [UIColor colorWithRed:0.800 green:0.800 blue:0.800 alpha:1]
 
 #define kDJWActionSheetCancelButtonTextColorNormalState         [UIColor whiteColor]
 #define kDJWActionSheetCancelButtonTextColorHighlightedState    [UIColor whiteColor]
 #define kDJWActionSheetCancelButtonBackgroundColorNormal        [UIColor colorWithRed:0.192 green:0.192 blue:0.192 alpha:1]
 #define kDJWActionSheetCancelButtonBackgroundColorHighlighted   [UIColor colorWithRed:0.000 green:0.490 blue:0.965 alpha:1]
+#define kDJWActionSheetCancelButtonAlpha                        0.9
 
 #define kDJWActionSheetButtonFontSize                           17.0
 #define kDJWActionSheetButtonFont                               [UIFont boldSystemFontOfSize:kDJWActionSheetButtonFontSize]
@@ -46,7 +50,63 @@
 @property (strong, nonatomic) UIView *actionSheetBackgroundView;
 @property (strong, nonatomic) UILabel *titleLabel;
 
+@property (strong, nonatomic) UIView *containerSnapShotView;
+
 @end
+
+#pragma mark - UIButton+BackgroundColorForState Category
+
+@interface UIButton (BackgroundColorForState)
+
+- (void)setBackgroundColor:(UIColor *)backgroundColor forState:(UIControlState)state;
+
+@end
+
+@implementation UIButton (BackgroundColorForState)
+
+- (void)setBackgroundColor:(UIColor *)backgroundColor forState:(UIControlState)state
+{
+    UIImage *img = nil;
+    
+    CGRect rect = CGRectMake(0, 0, 2, 2);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context,
+                                   backgroundColor.CGColor);
+    CGContextFillRect(context, rect);
+    
+    img = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    [self setBackgroundImage:img forState:state];
+}
+
+@end
+
+#pragma mark - UIView+RoundCornersMask Category
+
+@interface UIView (CornerRadiusWithCorners)
+
+- (void)applyCornerRadiusMaskForCorners:(UIRectCorner)corners;
+
+@end
+
+@implementation UIView (CornerRadiusWithCorners)
+
+- (void)applyCornerRadiusMaskForCorners:(UIRectCorner)corners
+{
+    UIBezierPath *rounded = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:corners cornerRadii:CGSizeMake(6.0, 6.0)];
+    
+    CAShapeLayer *shape = [[CAShapeLayer alloc] init];
+    [shape setPath:rounded.CGPath];
+    
+    self.layer.mask = shape;
+}
+
+@end
+
+#pragma mark - DJWAction Sheet Implementation
 
 @implementation DJWActionSheet
 
@@ -114,9 +174,11 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
                 })];
                 
                 label.text = _title;
+                label.font = [UIFont systemFontOfSize:14.0];
                 label.textAlignment = NSTextAlignmentCenter;
-                label.backgroundColor = [UIColor whiteColor];
+                label.backgroundColor = kDJWActionSheetTitleBackgroundColor;
                 label.textColor = [UIColor blackColor];
+                
                 label;
             });
             [_actionSheetBackgroundView addSubview:_titleLabel];
@@ -153,11 +215,11 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
             
             NSInteger lastButtonIndex = [self.otherButtonTitles count] - 1;
             if (idx == 0) {
-                [self addMaskToButton:button byRoundingCorners:UIRectCornerTopLeft|UIRectCornerTopRight];
+                [button applyCornerRadiusMaskForCorners:UIRectCornerTopLeft|UIRectCornerTopRight];
             } else if (idx == lastButtonIndex) {
-                [self addMaskToButton:button byRoundingCorners:UIRectCornerBottomLeft|UIRectCornerBottomRight];
+                [button applyCornerRadiusMaskForCorners:UIRectCornerBottomLeft|UIRectCornerBottomRight];
             } else if (lastButtonIndex == 0) {
-                [self addMaskToButton:button byRoundingCorners:UIRectCornerAllCorners];
+                [button applyCornerRadiusMaskForCorners:UIRectCornerAllCorners];
             }
             
             if (idx != lastButtonIndex) {
@@ -187,7 +249,7 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
         
         button.titleLabel.font = kDJWActionSheetButtonFont;
         
-        button.alpha = 0.8;
+        button.alpha = kDJWActionSheetCancelButtonAlpha;
         
         [button addTarget:self action:@selector(cancelButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
 
@@ -207,16 +269,6 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
         view.backgroundColor = kDJWActionSheetButtonDividerColor;
         view;
     });
-}
-
-- (void)addMaskToButton:(UIButton *)button byRoundingCorners:(UIRectCorner)corners
-{
-    UIBezierPath *rounded = [UIBezierPath bezierPathWithRoundedRect:button.bounds byRoundingCorners:corners cornerRadii:CGSizeMake(6.0, 6.0)];
-    
-    CAShapeLayer *shape = [[CAShapeLayer alloc] init];
-    [shape setPath:rounded.CGPath];
-    
-    button.layer.mask = shape;
 }
 
 - (CGFloat)heightForActionSheetWithNumberOfButtons:(NSInteger)numberOfButtons
@@ -285,24 +337,3 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
 
 @end
 
-@implementation UIButton (BackgroundColorForState)
-
-- (void)setBackgroundColor:(UIColor *)backgroundColor forState:(UIControlState)state
-{
-    UIImage *img = nil;
-    
-    CGRect rect = CGRectMake(0, 0, 2, 2);
-    UIGraphicsBeginImageContext(rect.size);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetFillColorWithColor(context,
-                                   backgroundColor.CGColor);
-    CGContextFillRect(context, rect);
-    
-    img = UIGraphicsGetImageFromCurrentImageContext();
-    
-    UIGraphicsEndImageContext();
-    
-    [self setBackgroundImage:img forState:state];
-}
-
-@end
