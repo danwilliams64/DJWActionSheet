@@ -52,6 +52,7 @@
 // UI Properties
 @property (strong, nonatomic) UIView *actionSheetBackgroundView;
 @property (strong, nonatomic) UILabel *titleLabel;
+@property (strong, nonatomic) UIButton *cancelButton;
 
 @property (strong, nonatomic) UIView *containerSnapShotView;
 
@@ -173,7 +174,6 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
                     CGRect frame = CGRectZero;
                     CGFloat labelHeight = [self heightForActionSheetTitleLabel];
                     frame = CGRectMake(kDJWActionSheetHorizontalElementMargin, kDJWActionSheetTopMargin, CGRectGetWidth(_actionSheetBackgroundView.frame) - (kDJWActionSheetHorizontalElementMargin * 2), labelHeight);
-#warning ToDo: Remove magic number '30' and calculate the height of the label
                     frame;
                 })];
                 
@@ -242,7 +242,7 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
         yPos = CGRectGetMaxY(newButton.frame) + kDJWActionSheetButtonVerticalPadding;
     }];
     
-    UIButton *cancelButton = ({
+    self.cancelButton = ({
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.frame = ({
             CGRect frame = CGRectMake(kDJWActionSheetHorizontalElementMargin, yPos + kDJWActionSheetVerticalElementMargin, CGRectGetWidth(view.frame) - (kDJWActionSheetHorizontalElementMargin * 2), kDJWActionSheetButtonHeight);
@@ -267,7 +267,7 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
         button;
     });
     
-    [view addSubview:cancelButton];
+    [view addSubview:self.cancelButton];
 }
 
 - (UIView *)buttonDividerAtYPos:(CGFloat)yPos
@@ -304,8 +304,6 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
     height += kDJWActionSheetVerticalElementMargin;
     
     height += (self.title) ? [self heightForActionSheetTitleLabel] : 0;
-#warning ToDo: Remove magic number '30' and calculate the height of the label
-    
     return height;
 }
 
@@ -324,8 +322,10 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
 - (void)showInView:(UIView *)view
 {
     CGRect actionSheetBackgroundViewEndFrame = self.actionSheetBackgroundView.frame;
+    CGRect cancelButtonEndFrame = self.cancelButton.frame;
     
     self.actionSheetBackgroundView.frame = CGRectMake(CGRectGetMinX(self.actionSheetBackgroundView.frame), CGRectGetHeight(self.containerView.frame), CGRectGetWidth(self.actionSheetBackgroundView.frame), CGRectGetHeight(self.actionSheetBackgroundView.frame));
+    self.cancelButton.frame = CGRectMake(CGRectGetMinX(self.cancelButton.frame), CGRectGetMinY(self.cancelButton.frame) + kDJWActionSheetVerticalElementMargin * 15, CGRectGetWidth(self.cancelButton.frame), CGRectGetHeight(self.cancelButton.frame));
     
     [view addSubview:self];
     
@@ -334,7 +334,12 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
     } completion:^(BOOL finished) {
     }];
     
-#warning Check to see if the view can accomodate the actionSheet view correctly
+    [UIView animateWithDuration:kDJWActionSheetPresentationAnimationSpeed delay:0.3 usingSpringWithDamping:0.65 initialSpringVelocity:0 options:0 animations:^{
+        self.cancelButton.frame = cancelButtonEndFrame;
+    } completion:^(BOOL finished) {
+    }];
+    
+#warning ToDo: Check to see if the view can accomodate the actionSheet view correctly
 }
 
 - (void)dismissFromView:(UIView *)view
