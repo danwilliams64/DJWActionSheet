@@ -40,7 +40,8 @@
 @property (weak, nonatomic) UIView *containerView;
 
 // UI Properties
-@property (copy, nonatomic) UILabel *titleLabel;
+@property (strong, nonatomic) UIView *actionSheetBackgroundView;
+@property (strong, nonatomic) UILabel *titleLabel;
 
 @end
 
@@ -84,7 +85,7 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
         
         // Position at bottom of containerView
         
-        UIView *backgroundView = ({
+        _actionSheetBackgroundView = ({
             UIView *view = [[UIView alloc] initWithFrame:({
                 CGRect frame = self.bounds;
                 frame.size.width = CGRectGetWidth(containerView.frame);
@@ -98,13 +99,13 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
             view;
         });
         
-        [self addSubview:backgroundView];
+        [self addSubview:_actionSheetBackgroundView];
         
         if (_title) {
             _titleLabel = ({
                 UILabel *label = [[UILabel alloc] initWithFrame:({
                     CGRect frame = CGRectZero;
-                    frame = CGRectMake(kDJWActionSheetHorizontalElementMargin, kDJWActionSheetToplMargin, CGRectGetWidth(backgroundView.frame) - (kDJWActionSheetHorizontalElementMargin * 2), 30);
+                    frame = CGRectMake(kDJWActionSheetHorizontalElementMargin, kDJWActionSheetToplMargin, CGRectGetWidth(_actionSheetBackgroundView.frame) - (kDJWActionSheetHorizontalElementMargin * 2), 30);
 #warning ToDo: Remove magic number '30' and calculate the height of the label
                     frame;
                 })];
@@ -115,10 +116,10 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
                 label.textColor = [UIColor blackColor];
                 label;
             });
-            [backgroundView addSubview:_titleLabel];
+            [_actionSheetBackgroundView addSubview:_titleLabel];
         }
         
-        [self addButtonSubViewsToView:backgroundView];
+        [self addButtonSubViewsToView:_actionSheetBackgroundView];
     }
     
     return self;
