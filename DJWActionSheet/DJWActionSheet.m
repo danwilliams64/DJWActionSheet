@@ -12,6 +12,8 @@
 #define kDJWActionSheetVerticalElementMargin                    5.0
 #define kDJWActionSheetToplMargin                               10.0
 
+#define kDJWActionSheetRoundedCornerRadius                      6.0
+
 #define kDJWActionSheetTitleBackgroundColor                     [UIColor colorWithRed:0.961 green:0.961 blue:0.961 alpha:1]
 #define kDJWActionSheetTitleFont                                [UIFont systemFontOfSize:14.0]
 
@@ -88,15 +90,15 @@
 
 @interface UIView (CornerRadiusWithCorners)
 
-- (void)applyCornerRadiusMaskForCorners:(UIRectCorner)corners;
+- (void)applyCornerRadiusMaskForCorners:(UIRectCorner)corners withRadius:(CGFloat)radius;
 
 @end
 
 @implementation UIView (CornerRadiusWithCorners)
 
-- (void)applyCornerRadiusMaskForCorners:(UIRectCorner)corners
+- (void)applyCornerRadiusMaskForCorners:(UIRectCorner)corners withRadius:(CGFloat)radius
 {
-    UIBezierPath *rounded = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:corners cornerRadii:CGSizeMake(6.0, 6.0)];
+    UIBezierPath *rounded = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:corners cornerRadii:CGSizeMake(radius, radius)];
     
     CAShapeLayer *shape = [[CAShapeLayer alloc] init];
     [shape setPath:rounded.CGPath];
@@ -179,6 +181,9 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
                 label.backgroundColor = kDJWActionSheetTitleBackgroundColor;
                 label.textColor = [UIColor blackColor];
                 
+                [label applyCornerRadiusMaskForCorners:UIRectCornerTopLeft|UIRectCornerTopRight withRadius:kDJWActionSheetRoundedCornerRadius];
+                [label addSubview:[self buttonDividerAtYPos:CGRectGetMaxY(label.bounds) - 1]];
+
                 label;
             });
             [_actionSheetBackgroundView addSubview:_titleLabel];
@@ -192,7 +197,7 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
 
 - (void)addButtonSubViewsToView:(UIView *)view
 {
-    __block CGFloat yPos = CGRectGetMaxY(self.titleLabel.frame) + kDJWActionSheetVerticalElementMargin;
+    __block CGFloat yPos = CGRectGetMaxY(self.titleLabel.frame);
     
     [self.otherButtonTitles enumerateObjectsUsingBlock:^(NSString *buttonTitle, NSUInteger idx, BOOL *stop) {
         UIButton *newButton = ({
@@ -214,12 +219,12 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
             button.layer.masksToBounds = YES;
             
             NSInteger lastButtonIndex = [self.otherButtonTitles count] - 1;
-            if (idx == 0) {
-                [button applyCornerRadiusMaskForCorners:UIRectCornerTopLeft|UIRectCornerTopRight];
+            if (idx == 0 && !self.title) {
+                [button applyCornerRadiusMaskForCorners:UIRectCornerTopLeft|UIRectCornerTopRight withRadius:kDJWActionSheetRoundedCornerRadius];
             } else if (idx == lastButtonIndex) {
-                [button applyCornerRadiusMaskForCorners:UIRectCornerBottomLeft|UIRectCornerBottomRight];
+                [button applyCornerRadiusMaskForCorners:UIRectCornerBottomLeft|UIRectCornerBottomRight withRadius:kDJWActionSheetRoundedCornerRadius];
             } else if (lastButtonIndex == 0) {
-                [button applyCornerRadiusMaskForCorners:UIRectCornerAllCorners];
+                [button applyCornerRadiusMaskForCorners:UIRectCornerAllCorners withRadius:kDJWActionSheetRoundedCornerRadius];
             }
             
             if (idx != lastButtonIndex) {
@@ -278,7 +283,6 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
     height += kDJWActionSheetButtonHeight * numberOfButtons;
     height += kDJWActionSheetButtonVerticalPadding * numberOfButtons;
     height += kDJWActionSheetToplMargin * 2;
-    height += kDJWActionSheetVerticalElementMargin;
     
     height += (self.title) ? 30 : 0;
 #warning ToDo: Remove magic number '30' and calculate the height of the label
