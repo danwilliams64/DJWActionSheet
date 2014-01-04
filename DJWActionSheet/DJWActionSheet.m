@@ -30,6 +30,9 @@
 #define kDJWActionSheetButtonHeight                             44.0
 #define kDJWActionSheetButtonVerticalPadding                    0.0
 
+#define kDJWActionSheetPresentationAnimationSpeed               0.6
+#define kDJWActionSheetDismissAnimationSpeed                    0.3
+
 @interface DJWActionSheet()
 
 @property (strong, nonatomic) NSString *title;
@@ -245,13 +248,32 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
 
 - (void)showInView:(UIView *)view
 {
+    CGRect actionSheetBackgroundViewEndFrame = self.actionSheetBackgroundView.frame;
+    
+    self.actionSheetBackgroundView.frame = CGRectMake(CGRectGetMinX(self.actionSheetBackgroundView.frame), CGRectGetHeight(self.containerView.frame), CGRectGetWidth(self.actionSheetBackgroundView.frame), CGRectGetHeight(self.actionSheetBackgroundView.frame));
+    
     [view addSubview:self];
+    
+    [UIView animateWithDuration:kDJWActionSheetPresentationAnimationSpeed delay:0 usingSpringWithDamping:0.6 initialSpringVelocity:0 options:0 animations:^{
+        self.actionSheetBackgroundView.frame = actionSheetBackgroundViewEndFrame;
+    } completion:^(BOOL finished) {
+    }];
+    
 #warning Check to see if the view can accomodate the actionSheet view correctly
 }
 
 - (void)dismissFromView:(UIView *)view
 {
-    [self removeFromSuperview];
+    CGRect actionSheetBackgroundViewEndFrame = CGRectMake(CGRectGetMinX(self.actionSheetBackgroundView.frame), CGRectGetHeight(self.containerView.frame), CGRectGetWidth(self.actionSheetBackgroundView.frame), CGRectGetHeight(self.actionSheetBackgroundView.frame));
+    
+    [UIView animateWithDuration:kDJWActionSheetDismissAnimationSpeed animations:^{
+        self.actionSheetBackgroundView.frame = actionSheetBackgroundViewEndFrame;
+    } completion:^(BOOL finished) {
+        if (finished) {
+            [self removeFromSuperview];
+        }
+    }];
+    
 }
 
 #pragma mark - Getters
