@@ -386,6 +386,7 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
 - (void)animateContainerSnapshotViewToScale:(CGFloat)scale
 {
     [UIView animateWithDuration:0.3 animations:^{
+        self.containerSnapShotView.alpha = (scale < 1) ? 0.6 : 1.0;
         self.containerSnapShotView.layer.transform = CATransform3DMakeScale(scale, scale, 1);
     }];
 }
