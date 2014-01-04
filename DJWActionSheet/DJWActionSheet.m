@@ -27,8 +27,8 @@
 
 #define kDJWActionSheetCancelButtonTextColorNormalState         [UIColor whiteColor]
 #define kDJWActionSheetCancelButtonTextColorHighlightedState    [UIColor whiteColor]
-#define kDJWActionSheetCancelButtonBackgroundColorNormal        [UIColor colorWithRed:0.192 green:0.192 blue:0.192 alpha:1]
-#define kDJWActionSheetCancelButtonBackgroundColorHighlighted   [UIColor colorWithRed:0.000 green:0.490 blue:0.965 alpha:1]
+#define kDJWActionSheetCancelButtonBackgroundColorNormal        [UIColor colorWithRed:0.192 green:0.192 blue:0.192 alpha:kDJWActionSheetCancelButtonAlpha]
+#define kDJWActionSheetCancelButtonBackgroundColorHighlighted   [UIColor colorWithRed:0.000 green:0.490 blue:0.965 alpha:kDJWActionSheetCancelButtonAlpha]
 #define kDJWActionSheetCancelButtonAlpha                        0.9
 
 #define kDJWActionSheetButtonFontSize                           17.0
@@ -146,6 +146,10 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
         _tapBlock = tapBlock;
         _containerView = containerView;
         
+        self.backgroundColor = [UIColor blackColor];
+        _containerSnapShotView = [containerView snapshotViewAfterScreenUpdates:NO];
+        [self addSubview:_containerSnapShotView];
+        
         NSInteger numberOfButtons = [otherButtonTitles count];
 #warning ToDo: account for destructive button
         CGFloat actionSheetHeight = [self heightForActionSheetWithNumberOfButtons:numberOfButtons];
@@ -256,9 +260,7 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
         [button setBackgroundColor:kDJWActionSheetCancelButtonBackgroundColorHighlighted forState:UIControlStateHighlighted];
         
         button.titleLabel.font = kDJWActionSheetButtonFont;
-        
-        button.alpha = kDJWActionSheetCancelButtonAlpha;
-        
+
         [button addTarget:self action:@selector(cancelButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
 
         button.layer.cornerRadius = 6.0f;
@@ -316,11 +318,14 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
 - (void)cancelButtonTapped:(UIButton *)sender
 {
     self.tapBlock(self, -1);
+    
     [self dismissFromView:self.containerView];
 }
 
 - (void)showInView:(UIView *)view
 {
+    [self animateContainerSnapshotViewToScale:0.9];
+    
     CGRect actionSheetBackgroundViewEndFrame = self.actionSheetBackgroundView.frame;
     CGRect cancelButtonEndFrame = self.cancelButton.frame;
     
@@ -334,7 +339,7 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
     } completion:^(BOOL finished) {
     }];
     
-    [UIView animateWithDuration:kDJWActionSheetPresentationAnimationSpeed delay:0.3 usingSpringWithDamping:0.65 initialSpringVelocity:0 options:0 animations:^{
+    [UIView animateWithDuration:0.35 delay:0.3 usingSpringWithDamping:0.65 initialSpringVelocity:0 options:0 animations:^{
         self.cancelButton.frame = cancelButtonEndFrame;
     } completion:^(BOOL finished) {
     }];
@@ -342,8 +347,17 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
 #warning ToDo: Check to see if the view can accomodate the actionSheet view correctly
 }
 
+- (void)animateContainerSnapshotViewToScale:(CGFloat)scale
+{
+    [UIView animateWithDuration:0.3 animations:^{
+        self.containerSnapShotView.layer.transform = CATransform3DMakeScale(scale, scale, 1);
+    }];
+}
+
 - (void)dismissFromView:(UIView *)view
 {
+    [self animateContainerSnapshotViewToScale:1.0];
+    
     CGRect actionSheetBackgroundViewEndFrame = CGRectMake(CGRectGetMinX(self.actionSheetBackgroundView.frame), CGRectGetHeight(self.containerView.frame), CGRectGetWidth(self.actionSheetBackgroundView.frame), CGRectGetHeight(self.actionSheetBackgroundView.frame));
     
     [UIView animateWithDuration:kDJWActionSheetDismissAnimationSpeed animations:^{

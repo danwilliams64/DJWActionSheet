@@ -395,6 +395,7 @@
 				GCC_PREFIX_HEADER = "DJWActionSheet/DJWActionSheet-Prefix.pch";
 				INFOPLIST_FILE = "DJWActionSheet/DJWActionSheet-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5300F76D-1F63-48D7-8CDF-E7F8A105A6D4";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -408,6 +409,7 @@
 				GCC_PREFIX_HEADER = "DJWActionSheet/DJWActionSheet-Prefix.pch";
 				INFOPLIST_FILE = "DJWActionSheet/DJWActionSheet-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5300F76D-1F63-48D7-8CDF-E7F8A105A6D4";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -473,6 +475,7 @@
 				0EBD664A1875FD47007DC69E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0EBD664B1875FD47007DC69E /* Build configuration list for PBXNativeTarget "DJWActionSheetTests" */ = {
 			isa = XCConfigurationList;
@@ -481,6 +484,7 @@
 				0EBD664D1875FD47007DC69E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
