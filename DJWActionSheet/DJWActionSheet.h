@@ -15,6 +15,7 @@ typedef void (^DJWActionSheetCompletionBlock) (DJWActionSheet * actionSheet, NSI
 @interface DJWActionSheet : UIView
 
 @property (assign, nonatomic, readonly) NSInteger cancelButtonIndex;
+@property (assign, nonatomic, readonly) NSInteger destructiveButtonIndex;
 
 + (void)showInView:(UIView *)view
          withTitle:(NSString *)title

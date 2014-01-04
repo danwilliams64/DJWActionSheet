@@ -42,7 +42,9 @@
                       tapBlock:^(DJWActionSheet *actionSheet, NSInteger tappedButtonIndex) {
                           if (tappedButtonIndex == actionSheet.cancelButtonIndex) {
                               NSLog(@"the user pressed the cancel button!");
-                          } else {
+                          } else if (tappedButtonIndex == actionSheet.destructiveButtonIndex) {
+                              NSLog(@"DELETE!!!!");
+                          }else {
                               NSLog(@"The user tapped button at index: %i", tappedButtonIndex);
                           }
                       }];
