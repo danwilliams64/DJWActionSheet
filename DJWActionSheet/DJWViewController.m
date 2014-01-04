@@ -38,7 +38,7 @@
                      withTitle:@"@thatgamecompany is not blocked."
              cancelButtonTitle:@"Cancel"
         destructiveButtonTitle:@"Delete"
-             otherButtonTitles:@[@"View Replies", @"View Favourites", @"Report Spam"]
+             otherButtonTitles:@[@"View Replies", @"View Favourites", @"Report Spam", @"Fourth Element"]
                       tapBlock:^(DJWActionSheet *actionSheet, NSInteger tappedButtonIndex) {
                           if (tappedButtonIndex == actionSheet.cancelButtonIndex) {
                               NSLog(@"the user pressed the cancel button!");

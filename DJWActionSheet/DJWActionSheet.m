@@ -142,6 +142,11 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
                      tapBlock:(DJWActionSheetCompletionBlock)tapBlock
                 containerView:(UIView *)containerView
 {
+    if ([otherButtonTitles count] > 8) {
+        [NSException raise:@"DJWActionSheetIllegalOtherButtonTitlesCount" format:@"Other button titles count cannot be greater than 8, you've used %i", [otherButtonTitles count]];
+        return nil;
+    }
+    
     self = [super initWithFrame:containerView.frame];
     if (self) {
         _title = title;
