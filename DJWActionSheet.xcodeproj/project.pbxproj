@@ -22,6 +22,7 @@
 		0EBD66431875FD47007DC69E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0EBD66411875FD47007DC69E /* InfoPlist.strings */; };
 		0EBD66451875FD47007DC69E /* DJWActionSheetTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBD66441875FD47007DC69E /* DJWActionSheetTests.m */; };
 		0EBD66501875FD5A007DC69E /* DJWActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBD664F1875FD5A007DC69E /* DJWActionSheet.m */; };
+		0EBD66531875FE12007DC69E /* UIActionSheet+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBD66521875FE12007DC69E /* UIActionSheet+Blocks.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,8 @@
 		0EBD66441875FD47007DC69E /* DJWActionSheetTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DJWActionSheetTests.m; sourceTree = "<group>"; };
 		0EBD664E1875FD5A007DC69E /* DJWActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJWActionSheet.h; sourceTree = "<group>"; };
 		0EBD664F1875FD5A007DC69E /* DJWActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJWActionSheet.m; sourceTree = "<group>"; };
+		0EBD66511875FE12007DC69E /* UIActionSheet+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+Blocks.h"; sourceTree = "<group>"; };
+		0EBD66521875FE12007DC69E /* UIActionSheet+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+Blocks.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +125,8 @@
 				0EBD662F1875FD47007DC69E /* DJWViewController.m */,
 				0EBD664E1875FD5A007DC69E /* DJWActionSheet.h */,
 				0EBD664F1875FD5A007DC69E /* DJWActionSheet.m */,
+				0EBD66511875FE12007DC69E /* UIActionSheet+Blocks.h */,
+				0EBD66521875FE12007DC69E /* UIActionSheet+Blocks.m */,
 				0EBD66311875FD47007DC69E /* Images.xcassets */,
 				0EBD66201875FD47007DC69E /* Supporting Files */,
 			);
@@ -258,6 +263,7 @@
 				0EBD66301875FD47007DC69E /* DJWViewController.m in Sources */,
 				0EBD662A1875FD47007DC69E /* DJWAppDelegate.m in Sources */,
 				0EBD66261875FD47007DC69E /* main.m in Sources */,
+				0EBD66531875FE12007DC69E /* UIActionSheet+Blocks.m in Sources */,
 				0EBD66501875FD5A007DC69E /* DJWActionSheet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

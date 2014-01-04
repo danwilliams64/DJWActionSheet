@@ -7,6 +7,7 @@
 //
 
 #import "DJWViewController.h"
+#import "DJWActionSheet.h"
 
 @interface DJWViewController ()
 
@@ -20,10 +21,31 @@
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)showActionSheetButtonTapped:(id)sender
+{
+    [DJWActionSheet showInView:self.view
+                     withTitle:nil
+             cancelButtonTitle:@"Cancel"
+        destructiveButtonTitle:@"Delete"
+             otherButtonTitles:@[@"View Replies", @"View Favourites", @"Report Spam"]
+                      tapBlock:^(DJWActionSheet *actionSheet, NSInteger tappedButtonIndex) {
+                          if (tappedButtonIndex == actionSheet.cancelButtonIndex) {
+                              NSLog(@"the user pressed the cancel button!");
+                          } else {
+                              NSLog(@"The user tapped button at index: %i", tappedButtonIndex);
+                          }
+                      }];
 }
 
 @end
