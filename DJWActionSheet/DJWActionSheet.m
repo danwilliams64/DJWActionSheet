@@ -10,12 +10,13 @@
 
 #define kDJWActionSheetHorizontalElementMargin                  10.0
 #define kDJWActionSheetVerticalElementMargin                    5.0
-#define kDJWActionSheetToplMargin                               10.0
+#define kDJWActionSheetTopMargin                                10.0
 
 #define kDJWActionSheetRoundedCornerRadius                      6.0
 
 #define kDJWActionSheetTitleBackgroundColor                     [UIColor colorWithRed:0.961 green:0.961 blue:0.961 alpha:1]
-#define kDJWActionSheetTitleFont                                [UIFont systemFontOfSize:14.0]
+#define kDJWActionSheetTitleFontSize                            14.0
+#define kDJWActionSheetTitleFont                                [UIFont systemFontOfSize:kDJWActionSheetTitleFontSize]
 
 #define kDJWActionSheetButtonTextColorNormalState               [UIColor blackColor]
 #define kDJWActionSheetButtonTextColorHighlightedState          [UIColor whiteColor]
@@ -135,10 +136,6 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
                      tapBlock:(DJWActionSheetCompletionBlock)tapBlock
                 containerView:(UIView *)containerView
 {
-    NSInteger numberOfButtons = [otherButtonTitles count] + 1;
-#warning ToDo: account for destructive button
-    CGFloat actionSheetHeight = [self heightForActionSheetWithNumberOfButtons:numberOfButtons];
-    
     self = [super initWithFrame:containerView.frame];
     if (self) {
         _title = title;
@@ -147,6 +144,10 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
         _otherButtonTitles = otherButtonTitles;
         _tapBlock = tapBlock;
         _containerView = containerView;
+        
+        NSInteger numberOfButtons = [otherButtonTitles count];
+#warning ToDo: account for destructive button
+        CGFloat actionSheetHeight = [self heightForActionSheetWithNumberOfButtons:numberOfButtons];
         
         // Position at bottom of containerView
         
@@ -170,12 +171,14 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
             _titleLabel = ({
                 UILabel *label = [[UILabel alloc] initWithFrame:({
                     CGRect frame = CGRectZero;
-                    frame = CGRectMake(kDJWActionSheetHorizontalElementMargin, kDJWActionSheetToplMargin, CGRectGetWidth(_actionSheetBackgroundView.frame) - (kDJWActionSheetHorizontalElementMargin * 2), 30);
+                    CGFloat labelHeight = [self heightForActionSheetTitleLabel];
+                    frame = CGRectMake(kDJWActionSheetHorizontalElementMargin, kDJWActionSheetTopMargin, CGRectGetWidth(_actionSheetBackgroundView.frame) - (kDJWActionSheetHorizontalElementMargin * 2), labelHeight);
 #warning ToDo: Remove magic number '30' and calculate the height of the label
                     frame;
                 })];
                 
                 label.text = _title;
+                label.numberOfLines = 0;
                 label.font = [UIFont systemFontOfSize:14.0];
                 label.textAlignment = NSTextAlignmentCenter;
                 label.backgroundColor = kDJWActionSheetTitleBackgroundColor;
@@ -276,15 +279,31 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
     });
 }
 
+- (CGFloat)heightForActionSheetTitleLabel
+{
+    NSString *title = self.title;
+    CGSize maxLabelSize = CGSizeMake(CGRectGetWidth(self.frame) - (kDJWActionSheetHorizontalElementMargin * 2), CGFLOAT_MAX);
+    
+    CGRect labelRect = [title boundingRectWithSize:maxLabelSize
+                                           options:NSStringDrawingUsesLineFragmentOrigin
+                                        attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:kDJWActionSheetTitleFontSize]}
+                                           context:nil];
+    
+    return labelRect.size.height + 10;
+}
+
 - (CGFloat)heightForActionSheetWithNumberOfButtons:(NSInteger)numberOfButtons
 {
     CGFloat height = 0.0;
     
+    numberOfButtons++; // increment to account for the `cancel` button
+    
     height += kDJWActionSheetButtonHeight * numberOfButtons;
     height += kDJWActionSheetButtonVerticalPadding * numberOfButtons;
-    height += kDJWActionSheetToplMargin * 2;
+    height += kDJWActionSheetTopMargin * 2;
+    height += kDJWActionSheetVerticalElementMargin;
     
-    height += (self.title) ? 30 : 0;
+    height += (self.title) ? [self heightForActionSheetTitleLabel] : 0;
 #warning ToDo: Remove magic number '30' and calculate the height of the label
     
     return height;
