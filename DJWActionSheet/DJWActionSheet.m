@@ -160,6 +160,8 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
         _containerSnapShotView = [containerView.window snapshotViewAfterScreenUpdates:NO];
         [self addSubview:_containerSnapShotView];
         
+        [_containerSnapShotView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cancelButtonTapped:)]];
+        
         NSInteger numberOfButtons = [otherButtonTitles count];
 #warning ToDo: account for destructive button
         CGFloat actionSheetHeight = [self heightForActionSheetWithNumberOfButtons:numberOfButtons];
