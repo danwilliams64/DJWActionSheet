@@ -2,48 +2,28 @@
 //  DJWActionSheet.m
 //  DJWActionSheet
 //
-//  Created by Daniel Williams on 02/01/2014.
 //  Copyright (c) 2014 Daniel Williams. All rights reserved.
 //
 
 #import "DJWActionSheet.h"
 
-#define kDJWActionSheetHorizontalElementMargin                      10.0
-#define kDJWActionSheetVerticalElementMargin                        5.0
-#define kDJWActionSheetTopMargin                                    10.0
+// Action sheet
+static const CGFloat DJWActionSheetHorizontalElementMargin = 10.0;
+static const CGFloat DJWActionSheetVerticalElementMargin = 5.0;
+static const CGFloat DJWActionSheetTopMargin = 10.0;
+static const CGFloat DJWActionSheetRoundedCornerRadius = 6.0;
 
-#define kDJWActionSheetRoundedCornerRadius                          6.0
+// Action sheet buttons
+static const CGFloat DJWActionSheetButtonHeight = 44.0;
+static const CGFloat DJWActionSheetButtonVerticalPadding = 0;
 
-#define kDJWActionSheetTitleBackgroundColor                         [UIColor colorWithRed:0.961 green:0.961 blue:0.961 alpha:1]
-#define kDJWActionSheetTitleFontSize                                14.0
-#define kDJWActionSheetTitleFont                                    [UIFont systemFontOfSize:kDJWActionSheetTitleFontSize]
+// Animation Durations
+static const CGFloat DJWActionSheetPresentationAnimationSpeed = 0.6;
+static const CGFloat DJWActionSheetDismissAnimationSpeed = 0.3;
 
-#define kDJWActionSheetButtonTextColorNormalState                   [UIColor blackColor]
-#define kDJWActionSheetButtonTextColorHighlightedState              [UIColor whiteColor]
-#define kDJWActionSheetButtonBackgroundColorNormal                  [UIColor whiteColor]
-#define kDJWActionSheetButtonBackgroundColorHighlighted             [UIColor colorWithRed:0.000 green:0.490 blue:0.965 alpha:1]
-
-#define kDJWActionSheetButtonDividerColor                           [UIColor colorWithRed:0.800 green:0.800 blue:0.800 alpha:1]
-
-#define kDJWActionSheetCancelButtonTextColorNormalState             [UIColor whiteColor]
-#define kDJWActionSheetCancelButtonTextColorHighlightedState        [UIColor whiteColor]
-#define kDJWActionSheetCancelButtonBackgroundColorNormal            [UIColor colorWithRed:0.192 green:0.192 blue:0.192 alpha:kDJWActionSheetCancelButtonAlpha]
-#define kDJWActionSheetCancelButtonBackgroundColorHighlighted       [UIColor colorWithRed:0.000 green:0.490 blue:0.965 alpha:kDJWActionSheetCancelButtonAlpha]
-#define kDJWActionSheetCancelButtonAlpha                            0.9
-
-#define kDJWActionSheetDestructiveButtonBackgroundColorNormal       [UIColor colorWithRed:0.784 green:0.000 blue:0.000 alpha:1]
-#define kDJWActionSheetDestructiveButtonBackgroundColorHighlighted  [UIColor colorWithRed:0.588 green:0.000 blue:0.000 alpha:1]
-#define kDJWActionSheetDestructiveButtonTextColorNormal             [UIColor whiteColor]
-#define kDJWActionSheetDestructiveButtonTextColorHighlighted        [UIColor whiteColor]
-
-#define kDJWActionSheetButtonFontSize                               17.0
-#define kDJWActionSheetButtonFont                                   [UIFont boldSystemFontOfSize:kDJWActionSheetButtonFontSize]
-
-#define kDJWActionSheetButtonHeight                                 44.0
-#define kDJWActionSheetButtonVerticalPadding                        0.0
-
-#define kDJWActionSheetPresentationAnimationSpeed                   0.6
-#define kDJWActionSheetDismissAnimationSpeed                        0.3
+// Font Sizes
+static const CGFloat DJWActionSheetTitleFontSize = 14.0;
+static const CGFloat DJWActionSheetButtonFontSize = 17.0;
 
 @interface DJWActionSheet()
 
@@ -51,7 +31,6 @@
 @property (strong, nonatomic) NSString *cancelButtonTitle;
 @property (strong, nonatomic) NSString *destructiveButtonTitle;
 @property (strong, nonatomic) NSArray *otherButtonTitles;
-@property (copy, nonatomic) DJWActionSheetCompletionBlock tapBlock;
 @property (weak, nonatomic) UIView *containerView;
 
 // UI Properties
@@ -124,7 +103,7 @@
  cancelButtonTitle:(NSString *)cancelButtonTitle
 destructiveButtonTitle:(NSString *)destructiveButtonTitle
  otherButtonTitles:(NSArray *)otherButtonTitles
-          tapBlock:(DJWActionSheetCompletionBlock)tapBlock
+          tapBlock:(DJWActionSheetTapBlock)tapBlock
 {
     DJWActionSheet *actionSheet = [[DJWActionSheet alloc] initWithTitle:title
                                                       cancelButtonTitle:cancelButtonTitle
@@ -139,7 +118,7 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
             cancelButtonTitle:(NSString *)cancelButtonTitle
        destructiveButtonTitle:(NSString *)destructiveButtonTitle
             otherButtonTitles:(NSArray *)otherButtonTitles
-                     tapBlock:(DJWActionSheetCompletionBlock)tapBlock
+                     tapBlock:(DJWActionSheetTapBlock)tapBlock
                 containerView:(UIView *)containerView
 {
     if ([otherButtonTitles count] > 8) {
@@ -163,7 +142,6 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
         [_containerSnapShotView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cancelButtonTapped:)]];
         
         NSInteger numberOfButtons = [otherButtonTitles count];
-#warning ToDo: account for destructive button
         CGFloat actionSheetHeight = [self heightForActionSheetWithNumberOfButtons:numberOfButtons];
         
         // Position at bottom of containerView
@@ -189,7 +167,7 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
                 UILabel *label = [[UILabel alloc] initWithFrame:({
                     CGRect frame = CGRectZero;
                     CGFloat labelHeight = [self heightForActionSheetTitleLabel];
-                    frame = CGRectMake(kDJWActionSheetHorizontalElementMargin, kDJWActionSheetTopMargin, CGRectGetWidth(_actionSheetBackgroundView.frame) - (kDJWActionSheetHorizontalElementMargin * 2), labelHeight);
+                    frame = CGRectMake(DJWActionSheetHorizontalElementMargin, DJWActionSheetTopMargin, CGRectGetWidth(_actionSheetBackgroundView.frame) - (DJWActionSheetHorizontalElementMargin * 2), labelHeight);
                     frame;
                 })];
                 
@@ -197,10 +175,10 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
                 label.numberOfLines = 0;
                 label.font = [UIFont systemFontOfSize:14.0];
                 label.textAlignment = NSTextAlignmentCenter;
-                label.backgroundColor = kDJWActionSheetTitleBackgroundColor;
+                label.backgroundColor = [DJWActionSheet DJWActionSheetTitleBackgroundColor];
                 label.textColor = [UIColor blackColor];
                 
-                [label applyCornerRadiusMaskForCorners:UIRectCornerTopLeft|UIRectCornerTopRight withRadius:kDJWActionSheetRoundedCornerRadius];
+                [label applyCornerRadiusMaskForCorners:UIRectCornerTopLeft|UIRectCornerTopRight withRadius:DJWActionSheetRoundedCornerRadius];
                 [label addSubview:[self buttonDividerAtYPos:CGRectGetMaxY(label.bounds) - 1]];
 
                 label;
@@ -222,28 +200,27 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
         UIButton *newButton = ({
             UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
             button.frame = ({
-                CGRect frame = CGRectMake(kDJWActionSheetHorizontalElementMargin, yPos, CGRectGetWidth(view.frame) - (kDJWActionSheetHorizontalElementMargin * 2), kDJWActionSheetButtonHeight);
+                CGRect frame = CGRectMake(DJWActionSheetHorizontalElementMargin, yPos, CGRectGetWidth(view.frame) - (DJWActionSheetHorizontalElementMargin * 2), DJWActionSheetButtonHeight);
                 frame;
             });
             
             [button setTag:idx]; // To determine which button was tapped
             [button setTitle:buttonTitle forState:UIControlStateNormal];
-            [button setTitleColor:kDJWActionSheetButtonTextColorNormalState forState:UIControlStateNormal];
-            [button setTitleColor:kDJWActionSheetButtonTextColorHighlightedState forState:UIControlStateHighlighted];
-            [button setBackgroundColor:kDJWActionSheetButtonBackgroundColorNormal forState:UIControlStateNormal];
-            [button setBackgroundColor:kDJWActionSheetButtonBackgroundColorHighlighted forState:UIControlStateHighlighted];
+            [button setTitleColor:[DJWActionSheet DJWActionSheetButtonTextColorForState:UIControlStateNormal] forState:UIControlStateNormal];
+            [button setTitleColor:[DJWActionSheet DJWActionSheetButtonTextColorForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
+            [button setBackgroundColor:[DJWActionSheet DJWActionSheetButtonBackgroundColorForState:UIControlStateNormal] forState:UIControlStateNormal];
+            [button setBackgroundColor:[DJWActionSheet DJWActionSheetButtonBackgroundColorForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
             
-            button.titleLabel.font = kDJWActionSheetButtonFont;
-            
+            button.titleLabel.font = [UIFont boldSystemFontOfSize:DJWActionSheetTitleFontSize];
             button.layer.masksToBounds = YES;
             
             NSInteger lastButtonIndex = [self.otherButtonTitles count] - 1;
             if (idx == 0 && !self.title) {
-                [button applyCornerRadiusMaskForCorners:UIRectCornerTopLeft|UIRectCornerTopRight withRadius:kDJWActionSheetRoundedCornerRadius];
+                [button applyCornerRadiusMaskForCorners:UIRectCornerTopLeft|UIRectCornerTopRight withRadius:DJWActionSheetRoundedCornerRadius];
             } else if (idx == lastButtonIndex && !self.destructiveButtonTitle) {
-                [button applyCornerRadiusMaskForCorners:UIRectCornerBottomLeft|UIRectCornerBottomRight withRadius:kDJWActionSheetRoundedCornerRadius];
+                [button applyCornerRadiusMaskForCorners:UIRectCornerBottomLeft|UIRectCornerBottomRight withRadius:DJWActionSheetRoundedCornerRadius];
             } else if (lastButtonIndex == 0 && !self.destructiveButtonTitle) {
-                [button applyCornerRadiusMaskForCorners:UIRectCornerAllCorners withRadius:kDJWActionSheetRoundedCornerRadius];
+                [button applyCornerRadiusMaskForCorners:UIRectCornerAllCorners withRadius:DJWActionSheetRoundedCornerRadius];
             }
             
             if (idx != lastButtonIndex) {
@@ -255,46 +232,46 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
         });
         
         [view addSubview:newButton];
-        yPos = CGRectGetMaxY(newButton.frame) + kDJWActionSheetButtonVerticalPadding;
+        yPos = CGRectGetMaxY(newButton.frame) + DJWActionSheetButtonVerticalPadding;
     }];
     
     if (self.destructiveButtonTitle) {
         UIButton *newButton = [UIButton buttonWithType:UIButtonTypeCustom];
         newButton.frame = ({
-            CGRect frame = CGRectMake(kDJWActionSheetHorizontalElementMargin, yPos, CGRectGetWidth(view.frame) - (kDJWActionSheetHorizontalElementMargin * 2), kDJWActionSheetButtonHeight);
+            CGRect frame = CGRectMake(DJWActionSheetHorizontalElementMargin, yPos, CGRectGetWidth(view.frame) - (DJWActionSheetHorizontalElementMargin * 2), DJWActionSheetButtonHeight);
             frame;
         });
         
         [newButton setTag:-2];
         [newButton setTitle:self.destructiveButtonTitle forState:UIControlStateNormal];
-        [newButton setTitleColor:kDJWActionSheetDestructiveButtonTextColorNormal forState:UIControlStateNormal];
-        [newButton setTitleColor:kDJWActionSheetDestructiveButtonTextColorHighlighted forState:UIControlStateHighlighted];
-        [newButton setBackgroundColor:kDJWActionSheetDestructiveButtonBackgroundColorNormal forState:UIControlStateNormal];
-        [newButton setBackgroundColor:kDJWActionSheetDestructiveButtonBackgroundColorHighlighted forState:UIControlStateHighlighted];
-        newButton.titleLabel.font = kDJWActionSheetButtonFont;
+        [newButton setTitleColor:[DJWActionSheet DJWActionSheetDestructiveButtonTextColorForState:UIControlStateNormal] forState:UIControlStateNormal];
+        [newButton setTitleColor:[DJWActionSheet DJWActionSheetDestructiveButtonTextColorForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
+        [newButton setBackgroundColor:[DJWActionSheet DJWActionSheetDestructiveButtonBackgroundColorForState:UIControlStateNormal] forState:UIControlStateNormal];
+        [newButton setBackgroundColor:[DJWActionSheet DJWActionSheetDestructiveButtonBackgroundColorForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
+        newButton.titleLabel.font = [UIFont boldSystemFontOfSize:DJWActionSheetButtonFontSize];
 
         [newButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
         newButton.layer.masksToBounds = NO;
-        [newButton applyCornerRadiusMaskForCorners:UIRectCornerBottomLeft|UIRectCornerBottomRight withRadius:kDJWActionSheetRoundedCornerRadius];
+        [newButton applyCornerRadiusMaskForCorners:UIRectCornerBottomLeft|UIRectCornerBottomRight withRadius:DJWActionSheetRoundedCornerRadius];
 
         [view addSubview:newButton];
-        yPos = CGRectGetMaxY(newButton.frame) + kDJWActionSheetButtonVerticalPadding;
+        yPos = CGRectGetMaxY(newButton.frame) + DJWActionSheetButtonVerticalPadding;
     }
     
     self.cancelButton = ({
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.frame = ({
-            CGRect frame = CGRectMake(kDJWActionSheetHorizontalElementMargin, yPos + kDJWActionSheetVerticalElementMargin, CGRectGetWidth(view.frame) - (kDJWActionSheetHorizontalElementMargin * 2), kDJWActionSheetButtonHeight);
+            CGRect frame = CGRectMake(DJWActionSheetHorizontalElementMargin, yPos + DJWActionSheetVerticalElementMargin, CGRectGetWidth(view.frame) - (DJWActionSheetHorizontalElementMargin * 2), DJWActionSheetButtonHeight);
             frame;
         });
         
         [button setTitle:self.cancelButtonTitle forState:UIControlStateNormal];
-        [button setTitleColor:kDJWActionSheetCancelButtonTextColorNormalState forState:UIControlStateNormal];
-        [button setTitleColor:kDJWActionSheetCancelButtonTextColorHighlightedState forState:UIControlStateHighlighted];
-        [button setBackgroundColor:kDJWActionSheetCancelButtonBackgroundColorNormal forState:UIControlStateNormal];
-        [button setBackgroundColor:kDJWActionSheetCancelButtonBackgroundColorHighlighted forState:UIControlStateHighlighted];
+        [button setTitleColor:[DJWActionSheet DJWActionSheetCancelButtonTextColorForState:UIControlStateNormal] forState:UIControlStateNormal];
+        [button setTitleColor:[DJWActionSheet DJWActionSheetCancelButtonTextColorForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
+        [button setBackgroundColor:[DJWActionSheet DJWActionSheetCancelButtonBackgroundColorForState:UIControlStateNormal] forState:UIControlStateNormal];
+        [button setBackgroundColor:[DJWActionSheet DJWActionSheetCancelButtonBackgroundColorForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
         
-        button.titleLabel.font = kDJWActionSheetButtonFont;
+        button.titleLabel.font = [UIFont boldSystemFontOfSize:DJWActionSheetButtonFontSize];
 
         [button addTarget:self action:@selector(cancelButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
 
@@ -310,8 +287,8 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
 - (UIView *)buttonDividerAtYPos:(CGFloat)yPos
 {
     return ({
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, yPos, CGRectGetWidth(self.containerView.frame) - (kDJWActionSheetHorizontalElementMargin * 2), 1)];
-        view.backgroundColor = kDJWActionSheetButtonDividerColor;
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, yPos, CGRectGetWidth(self.containerView.frame) - (DJWActionSheetHorizontalElementMargin * 2), 1)];
+        view.backgroundColor = [DJWActionSheet DJWActionSheetDividerColor];
         view;
     });
 }
@@ -319,11 +296,11 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
 - (CGFloat)heightForActionSheetTitleLabel
 {
     NSString *title = self.title;
-    CGSize maxLabelSize = CGSizeMake(CGRectGetWidth(self.frame) - (kDJWActionSheetHorizontalElementMargin * 2), CGFLOAT_MAX);
+    CGSize maxLabelSize = CGSizeMake(CGRectGetWidth(self.frame) - (DJWActionSheetHorizontalElementMargin * 2), CGFLOAT_MAX);
     
     CGRect labelRect = [title boundingRectWithSize:maxLabelSize
                                            options:NSStringDrawingUsesLineFragmentOrigin
-                                        attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:kDJWActionSheetTitleFontSize]}
+                                        attributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:DJWActionSheetTitleFontSize]}
                                            context:nil];
     
     return labelRect.size.height + 10;
@@ -338,10 +315,10 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
         numberOfButtons++;
     }
     
-    height += kDJWActionSheetButtonHeight * numberOfButtons;
-    height += kDJWActionSheetButtonVerticalPadding * numberOfButtons;
-    height += kDJWActionSheetTopMargin * 2;
-    height += kDJWActionSheetVerticalElementMargin;
+    height += DJWActionSheetButtonHeight * numberOfButtons;
+    height += DJWActionSheetButtonVerticalPadding * numberOfButtons;
+    height += DJWActionSheetTopMargin * 2;
+    height += DJWActionSheetVerticalElementMargin;
     
     height += (self.title) ? [self heightForActionSheetTitleLabel] : 0;
     return height;
@@ -368,11 +345,11 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
     CGRect cancelButtonEndFrame = self.cancelButton.frame;
     
     self.actionSheetBackgroundView.frame = CGRectMake(CGRectGetMinX(self.actionSheetBackgroundView.frame), CGRectGetHeight(self.containerView.frame), CGRectGetWidth(self.actionSheetBackgroundView.frame), CGRectGetHeight(self.actionSheetBackgroundView.frame));
-    self.cancelButton.frame = CGRectMake(CGRectGetMinX(self.cancelButton.frame), CGRectGetMinY(self.cancelButton.frame) + kDJWActionSheetVerticalElementMargin * 15, CGRectGetWidth(self.cancelButton.frame), CGRectGetHeight(self.cancelButton.frame));
+    self.cancelButton.frame = CGRectMake(CGRectGetMinX(self.cancelButton.frame), CGRectGetMinY(self.cancelButton.frame) + DJWActionSheetVerticalElementMargin * 15, CGRectGetWidth(self.cancelButton.frame), CGRectGetHeight(self.cancelButton.frame));
     
     [view.window addSubview:self];
     
-    [UIView animateWithDuration:kDJWActionSheetPresentationAnimationSpeed delay:0 usingSpringWithDamping:0.6 initialSpringVelocity:0 options:0 animations:^{
+    [UIView animateWithDuration:DJWActionSheetPresentationAnimationSpeed delay:0 usingSpringWithDamping:0.6 initialSpringVelocity:0 options:0 animations:^{
         self.actionSheetBackgroundView.frame = actionSheetBackgroundViewEndFrame;
     } completion:^(BOOL finished) {
     }];
@@ -381,8 +358,6 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
         self.cancelButton.frame = cancelButtonEndFrame;
     } completion:^(BOOL finished) {
     }];
-    
-#warning ToDo: Check to see if the view can accomodate the actionSheet view correctly
 }
 
 - (void)animateContainerSnapshotViewToScale:(CGFloat)scale
@@ -399,7 +374,7 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
     
     CGRect actionSheetBackgroundViewEndFrame = CGRectMake(CGRectGetMinX(self.actionSheetBackgroundView.frame), CGRectGetHeight(self.containerView.frame), CGRectGetWidth(self.actionSheetBackgroundView.frame), CGRectGetHeight(self.actionSheetBackgroundView.frame));
     
-    [UIView animateWithDuration:kDJWActionSheetDismissAnimationSpeed animations:^{
+    [UIView animateWithDuration:DJWActionSheetDismissAnimationSpeed animations:^{
         self.actionSheetBackgroundView.frame = actionSheetBackgroundViewEndFrame;
     } completion:^(BOOL finished) {
         if (finished) {
@@ -420,5 +395,112 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
     return -2;
 }
 
-@end
+#pragma mark - Class Methods
 
++ (UIColor *)DJWActionSheetButtonTextColorForState:(UIControlState)controlState
+{
+    switch (controlState) {
+        case UIControlStateNormal:
+            return [UIColor blackColor];
+            break;
+        case UIControlStateHighlighted:
+            return [UIColor whiteColor];
+            break;
+            
+        default:
+            return [UIColor blackColor];
+            break;
+    }
+}
+
++ (UIColor *)DJWActionSheetButtonBackgroundColorForState:(UIControlState)controlState
+{
+    switch (controlState) {
+        case UIControlStateNormal:
+            return [UIColor whiteColor];
+            break;
+        case UIControlStateHighlighted:
+            return [UIColor colorWithRed:0.000 green:0.490 blue:0.965 alpha:1];
+            break;
+            
+        default:
+            return [UIColor whiteColor];
+            break;
+    }
+}
+
++ (UIColor *)DJWActionSheetCancelButtonTextColorForState:(UIControlState)controlState
+{
+    switch (controlState) {
+        case UIControlStateNormal:
+            return [UIColor whiteColor];
+            break;
+        case UIControlStateHighlighted:
+            return [UIColor whiteColor];
+            break;
+            
+        default:
+            return [UIColor whiteColor];
+            break;
+    }
+}
+
++ (UIColor *)DJWActionSheetDestructiveButtonBackgroundColorForState:(UIControlState)controlState
+{
+    switch (controlState) {
+        case UIControlStateNormal:
+            return [UIColor colorWithRed:0.784 green:0.000 blue:0.000 alpha:1];
+            break;
+        case UIControlStateHighlighted:
+            return [UIColor colorWithRed:0.588 green:0.000 blue:0.000 alpha:1];
+            break;
+            
+        default:
+            return [UIColor blackColor];
+            break;
+    }
+}
+
++ (UIColor *)DJWActionSheetDestructiveButtonTextColorForState:(UIControlState)controlState
+{
+    switch (controlState) {
+        case UIControlStateNormal:
+            return [UIColor whiteColor];
+            break;
+        case UIControlStateHighlighted:
+            return [UIColor whiteColor];
+            break;
+            
+        default:
+            return [UIColor whiteColor];
+            break;
+    }
+}
+
++ (UIColor *)DJWActionSheetCancelButtonBackgroundColorForState:(UIControlState)controlState
+{
+    switch (controlState) {
+        case UIControlStateNormal:
+            return [UIColor colorWithRed:0.192 green:0.192 blue:0.192 alpha:0.9];
+            break;
+        case UIControlStateHighlighted:
+            return [UIColor colorWithRed:0.000 green:0.490 blue:0.965 alpha:0.9];
+            break;
+            
+        default:
+            return [UIColor blackColor];
+            break;
+    }
+}
+
++ (UIColor *)DJWActionSheetTitleBackgroundColor
+{
+    return [UIColor colorWithRed:0.961 green:0.961 blue:0.961 alpha:1];
+}
+
++ (UIColor *)DJWActionSheetDividerColor
+{
+    return [UIColor colorWithRed:0.800 green:0.800 blue:0.800 alpha:1];
+}
+
+@end
