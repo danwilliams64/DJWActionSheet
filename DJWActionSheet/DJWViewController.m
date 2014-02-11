@@ -35,7 +35,7 @@
 - (IBAction)showActionSheetButtonTapped:(id)sender
 {
     [DJWActionSheet showInView:self.view
-                     withTitle:@"Test Action Sheet"
+                     withTitle:@"What would you like to do?"
              cancelButtonTitle:@"Cancel"
         destructiveButtonTitle:@"Delete"
              otherButtonTitles:@[@"View Replies", @"View Favourites", @"Report Spam", @"Fourth Button"]
