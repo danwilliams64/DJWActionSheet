@@ -35,15 +35,15 @@
 - (IBAction)showActionSheetButtonTapped:(id)sender
 {
     [DJWActionSheet showInView:self.view
-                     withTitle:@"@thatgamecompany is not blocked."
+                     withTitle:@"Test Action Sheet"
              cancelButtonTitle:@"Cancel"
         destructiveButtonTitle:@"Delete"
-             otherButtonTitles:@[@"View Replies", @"View Favourites", @"Report Spam", @"Fourth Element"]
+             otherButtonTitles:@[@"View Replies", @"View Favourites", @"Report Spam", @"Fourth Button"]
                       tapBlock:^(DJWActionSheet *actionSheet, NSInteger tappedButtonIndex) {
                           if (tappedButtonIndex == actionSheet.cancelButtonIndex) {
-                              NSLog(@"the user pressed the cancel button!");
+                              NSLog(@"User Cancelled");
                           } else if (tappedButtonIndex == actionSheet.destructiveButtonIndex) {
-                              NSLog(@"DELETE!!!!");
+                              NSLog(@"Destructive button tapped");
                           }else {
                               NSLog(@"The user tapped button at index: %i", tappedButtonIndex);
                           }
