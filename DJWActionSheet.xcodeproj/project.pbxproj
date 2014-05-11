@@ -21,7 +21,7 @@
 		0EBD663B1875FD47007DC69E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EBD661D1875FD46007DC69E /* UIKit.framework */; };
 		0EBD66431875FD47007DC69E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0EBD66411875FD47007DC69E /* InfoPlist.strings */; };
 		0EBD66451875FD47007DC69E /* DJWActionSheetTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBD66441875FD47007DC69E /* DJWActionSheetTests.m */; };
-		0EBD66501875FD5A007DC69E /* DJWActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBD664F1875FD5A007DC69E /* DJWActionSheet.m */; };
+		3734D024191FB6A8008D972D /* DJWActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3734D023191FB6A8008D972D /* DJWActionSheet.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,8 +54,8 @@
 		0EBD66401875FD47007DC69E /* DJWActionSheetTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DJWActionSheetTests-Info.plist"; sourceTree = "<group>"; };
 		0EBD66421875FD47007DC69E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0EBD66441875FD47007DC69E /* DJWActionSheetTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DJWActionSheetTests.m; sourceTree = "<group>"; };
-		0EBD664E1875FD5A007DC69E /* DJWActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJWActionSheet.h; sourceTree = "<group>"; };
-		0EBD664F1875FD5A007DC69E /* DJWActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJWActionSheet.m; sourceTree = "<group>"; };
+		3734D022191FB6A8008D972D /* DJWActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJWActionSheet.h; sourceTree = "<group>"; };
+		3734D023191FB6A8008D972D /* DJWActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJWActionSheet.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,13 +115,12 @@
 		0EBD661F1875FD47007DC69E /* DJWActionSheet */ = {
 			isa = PBXGroup;
 			children = (
+				3734D025191FB6AC008D972D /* DJWActionSheet */,
 				0EBD66281875FD47007DC69E /* DJWAppDelegate.h */,
 				0EBD66291875FD47007DC69E /* DJWAppDelegate.m */,
 				0EBD662B1875FD47007DC69E /* Main.storyboard */,
 				0EBD662E1875FD47007DC69E /* DJWViewController.h */,
 				0EBD662F1875FD47007DC69E /* DJWViewController.m */,
-				0EBD664E1875FD5A007DC69E /* DJWActionSheet.h */,
-				0EBD664F1875FD5A007DC69E /* DJWActionSheet.m */,
 				0EBD66311875FD47007DC69E /* Images.xcassets */,
 				0EBD66201875FD47007DC69E /* Supporting Files */,
 			);
@@ -155,6 +154,15 @@
 				0EBD66411875FD47007DC69E /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3734D025191FB6AC008D972D /* DJWActionSheet */ = {
+			isa = PBXGroup;
+			children = (
+				3734D022191FB6A8008D972D /* DJWActionSheet.h */,
+				3734D023191FB6A8008D972D /* DJWActionSheet.m */,
+			);
+			path = DJWActionSheet;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,7 +210,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = DJW;
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Daniel Williams";
 				TargetAttributes = {
 					0EBD66361875FD47007DC69E = {
@@ -258,7 +266,7 @@
 				0EBD66301875FD47007DC69E /* DJWViewController.m in Sources */,
 				0EBD662A1875FD47007DC69E /* DJWAppDelegate.m in Sources */,
 				0EBD66261875FD47007DC69E /* main.m in Sources */,
-				0EBD66501875FD5A007DC69E /* DJWActionSheet.m in Sources */,
+				3734D024191FB6A8008D972D /* DJWActionSheet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,7 +320,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -351,7 +358,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -415,7 +421,6 @@
 		0EBD664C1875FD47007DC69E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DJWActionSheet.app/DJWActionSheet";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -438,7 +443,6 @@
 		0EBD664D1875FD47007DC69E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DJWActionSheet.app/DJWActionSheet";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
