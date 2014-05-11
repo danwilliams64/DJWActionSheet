@@ -15,12 +15,12 @@
 		0EBD663B1875FD47007DC69E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EBD661D1875FD46007DC69E /* UIKit.framework */; };
 		0EBD66431875FD47007DC69E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0EBD66411875FD47007DC69E /* InfoPlist.strings */; };
 		0EBD66451875FD47007DC69E /* DJWActionSheetTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBD66441875FD47007DC69E /* DJWActionSheetTests.m */; };
-		3734D024191FB6A8008D972D /* DJWActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3734D023191FB6A8008D972D /* DJWActionSheet.m */; };
 		3734D028191FC1B6008D972D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3734D027191FC1B6008D972D /* main.m */; };
 		3734D02B191FC1C9008D972D /* DJWActionSheet-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3734D029191FC1C9008D972D /* DJWActionSheet-Info.plist */; };
 		3734D02C191FC1C9008D972D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3734D02A191FC1C9008D972D /* Images.xcassets */; };
 		3734D032191FC204008D972D /* DJWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3734D02F191FC204008D972D /* DJWAppDelegate.m */; };
 		3734D033191FC204008D972D /* DJWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3734D031191FC204008D972D /* DJWViewController.m */; };
+		3734D036191FC489008D972D /* DJWActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3734D035191FC489008D972D /* DJWActionSheet.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,8 +43,6 @@
 		0EBD66401875FD47007DC69E /* DJWActionSheetTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DJWActionSheetTests-Info.plist"; sourceTree = "<group>"; };
 		0EBD66421875FD47007DC69E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0EBD66441875FD47007DC69E /* DJWActionSheetTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DJWActionSheetTests.m; sourceTree = "<group>"; };
-		3734D022191FB6A8008D972D /* DJWActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJWActionSheet.h; sourceTree = "<group>"; };
-		3734D023191FB6A8008D972D /* DJWActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJWActionSheet.m; sourceTree = "<group>"; };
 		3734D026191FC1B6008D972D /* DJWActionSheet-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DJWActionSheet-Prefix.pch"; path = "Example/Other Sources/DJWActionSheet-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		3734D027191FC1B6008D972D /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "Example/Other Sources/main.m"; sourceTree = SOURCE_ROOT; };
 		3734D029191FC1C9008D972D /* DJWActionSheet-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "DJWActionSheet-Info.plist"; path = "Example/Resources/DJWActionSheet-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -53,6 +51,8 @@
 		3734D02F191FC204008D972D /* DJWAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DJWAppDelegate.m; path = Example/Classes/DJWAppDelegate.m; sourceTree = SOURCE_ROOT; };
 		3734D030191FC204008D972D /* DJWViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DJWViewController.h; path = Example/Classes/DJWViewController.h; sourceTree = SOURCE_ROOT; };
 		3734D031191FC204008D972D /* DJWViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DJWViewController.m; path = Example/Classes/DJWViewController.m; sourceTree = SOURCE_ROOT; };
+		3734D034191FC489008D972D /* DJWActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DJWActionSheet.h; path = DJWActionSheet/DJWActionSheet.h; sourceTree = SOURCE_ROOT; };
+		3734D035191FC489008D972D /* DJWActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DJWActionSheet.m; path = DJWActionSheet/DJWActionSheet.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,8 +151,8 @@
 		3734D025191FB6AC008D972D /* DJWActionSheet */ = {
 			isa = PBXGroup;
 			children = (
-				3734D022191FB6A8008D972D /* DJWActionSheet.h */,
-				3734D023191FB6A8008D972D /* DJWActionSheet.m */,
+				3734D034191FC489008D972D /* DJWActionSheet.h */,
+				3734D035191FC489008D972D /* DJWActionSheet.m */,
 			);
 			path = DJWActionSheet;
 			sourceTree = "<group>";
@@ -268,7 +268,7 @@
 				3734D028191FC1B6008D972D /* main.m in Sources */,
 				3734D032191FC204008D972D /* DJWAppDelegate.m in Sources */,
 				3734D033191FC204008D972D /* DJWViewController.m in Sources */,
-				3734D024191FB6A8008D972D /* DJWActionSheet.m in Sources */,
+				3734D036191FC489008D972D /* DJWActionSheet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

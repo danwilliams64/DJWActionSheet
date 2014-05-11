@@ -122,7 +122,7 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
                 containerView:(UIView *)containerView
 {
     if ([otherButtonTitles count] > 8) {
-        [NSException raise:@"DJWActionSheetIllegalOtherButtonTitlesCount" format:@"Other button titles count cannot be greater than 8, you've used %i", [otherButtonTitles count]];
+        [NSException raise:@"DJWActionSheetIllegalOtherButtonTitlesCount" format:@"Other button titles count cannot be greater than 8, you've used %@", @([otherButtonTitles count])];
         return nil;
     }
     
