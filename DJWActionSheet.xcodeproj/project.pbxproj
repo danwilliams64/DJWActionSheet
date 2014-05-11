@@ -10,18 +10,17 @@
 		0EBD661A1875FD46007DC69E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EBD66191875FD46007DC69E /* Foundation.framework */; };
 		0EBD661C1875FD46007DC69E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EBD661B1875FD46007DC69E /* CoreGraphics.framework */; };
 		0EBD661E1875FD46007DC69E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EBD661D1875FD46007DC69E /* UIKit.framework */; };
-		0EBD66241875FD47007DC69E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0EBD66221875FD47007DC69E /* InfoPlist.strings */; };
-		0EBD66261875FD47007DC69E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBD66251875FD47007DC69E /* main.m */; };
-		0EBD662A1875FD47007DC69E /* DJWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBD66291875FD47007DC69E /* DJWAppDelegate.m */; };
-		0EBD662D1875FD47007DC69E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EBD662B1875FD47007DC69E /* Main.storyboard */; };
-		0EBD66301875FD47007DC69E /* DJWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBD662F1875FD47007DC69E /* DJWViewController.m */; };
-		0EBD66321875FD47007DC69E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EBD66311875FD47007DC69E /* Images.xcassets */; };
 		0EBD66391875FD47007DC69E /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EBD66381875FD47007DC69E /* XCTest.framework */; };
 		0EBD663A1875FD47007DC69E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EBD66191875FD46007DC69E /* Foundation.framework */; };
 		0EBD663B1875FD47007DC69E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EBD661D1875FD46007DC69E /* UIKit.framework */; };
 		0EBD66431875FD47007DC69E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0EBD66411875FD47007DC69E /* InfoPlist.strings */; };
 		0EBD66451875FD47007DC69E /* DJWActionSheetTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBD66441875FD47007DC69E /* DJWActionSheetTests.m */; };
 		3734D024191FB6A8008D972D /* DJWActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3734D023191FB6A8008D972D /* DJWActionSheet.m */; };
+		3734D028191FC1B6008D972D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3734D027191FC1B6008D972D /* main.m */; };
+		3734D02B191FC1C9008D972D /* DJWActionSheet-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3734D029191FC1C9008D972D /* DJWActionSheet-Info.plist */; };
+		3734D02C191FC1C9008D972D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3734D02A191FC1C9008D972D /* Images.xcassets */; };
+		3734D032191FC204008D972D /* DJWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3734D02F191FC204008D972D /* DJWAppDelegate.m */; };
+		3734D033191FC204008D972D /* DJWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3734D031191FC204008D972D /* DJWViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,16 +38,6 @@
 		0EBD66191875FD46007DC69E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0EBD661B1875FD46007DC69E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		0EBD661D1875FD46007DC69E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		0EBD66211875FD47007DC69E /* DJWActionSheet-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DJWActionSheet-Info.plist"; sourceTree = "<group>"; };
-		0EBD66231875FD47007DC69E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		0EBD66251875FD47007DC69E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		0EBD66271875FD47007DC69E /* DJWActionSheet-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DJWActionSheet-Prefix.pch"; sourceTree = "<group>"; };
-		0EBD66281875FD47007DC69E /* DJWAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DJWAppDelegate.h; sourceTree = "<group>"; };
-		0EBD66291875FD47007DC69E /* DJWAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DJWAppDelegate.m; sourceTree = "<group>"; };
-		0EBD662C1875FD47007DC69E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		0EBD662E1875FD47007DC69E /* DJWViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DJWViewController.h; sourceTree = "<group>"; };
-		0EBD662F1875FD47007DC69E /* DJWViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DJWViewController.m; sourceTree = "<group>"; };
-		0EBD66311875FD47007DC69E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0EBD66371875FD47007DC69E /* DJWActionSheetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DJWActionSheetTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EBD66381875FD47007DC69E /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		0EBD66401875FD47007DC69E /* DJWActionSheetTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DJWActionSheetTests-Info.plist"; sourceTree = "<group>"; };
@@ -56,6 +45,14 @@
 		0EBD66441875FD47007DC69E /* DJWActionSheetTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DJWActionSheetTests.m; sourceTree = "<group>"; };
 		3734D022191FB6A8008D972D /* DJWActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJWActionSheet.h; sourceTree = "<group>"; };
 		3734D023191FB6A8008D972D /* DJWActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJWActionSheet.m; sourceTree = "<group>"; };
+		3734D026191FC1B6008D972D /* DJWActionSheet-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DJWActionSheet-Prefix.pch"; path = "Example/Other Sources/DJWActionSheet-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		3734D027191FC1B6008D972D /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "Example/Other Sources/main.m"; sourceTree = SOURCE_ROOT; };
+		3734D029191FC1C9008D972D /* DJWActionSheet-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "DJWActionSheet-Info.plist"; path = "Example/Resources/DJWActionSheet-Info.plist"; sourceTree = SOURCE_ROOT; };
+		3734D02A191FC1C9008D972D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Example/Resources/Images.xcassets; sourceTree = SOURCE_ROOT; };
+		3734D02E191FC204008D972D /* DJWAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DJWAppDelegate.h; path = Example/Classes/DJWAppDelegate.h; sourceTree = SOURCE_ROOT; };
+		3734D02F191FC204008D972D /* DJWAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DJWAppDelegate.m; path = Example/Classes/DJWAppDelegate.m; sourceTree = SOURCE_ROOT; };
+		3734D030191FC204008D972D /* DJWViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DJWViewController.h; path = Example/Classes/DJWViewController.h; sourceTree = SOURCE_ROOT; };
+		3734D031191FC204008D972D /* DJWViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DJWViewController.m; path = Example/Classes/DJWViewController.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,13 +112,8 @@
 		0EBD661F1875FD47007DC69E /* DJWActionSheet */ = {
 			isa = PBXGroup;
 			children = (
+				3734D02D191FC1F5008D972D /* Example */,
 				3734D025191FB6AC008D972D /* DJWActionSheet */,
-				0EBD66281875FD47007DC69E /* DJWAppDelegate.h */,
-				0EBD66291875FD47007DC69E /* DJWAppDelegate.m */,
-				0EBD662B1875FD47007DC69E /* Main.storyboard */,
-				0EBD662E1875FD47007DC69E /* DJWViewController.h */,
-				0EBD662F1875FD47007DC69E /* DJWViewController.m */,
-				0EBD66311875FD47007DC69E /* Images.xcassets */,
 				0EBD66201875FD47007DC69E /* Supporting Files */,
 			);
 			path = DJWActionSheet;
@@ -130,10 +122,10 @@
 		0EBD66201875FD47007DC69E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				0EBD66211875FD47007DC69E /* DJWActionSheet-Info.plist */,
-				0EBD66221875FD47007DC69E /* InfoPlist.strings */,
-				0EBD66251875FD47007DC69E /* main.m */,
-				0EBD66271875FD47007DC69E /* DJWActionSheet-Prefix.pch */,
+				3734D026191FC1B6008D972D /* DJWActionSheet-Prefix.pch */,
+				3734D027191FC1B6008D972D /* main.m */,
+				3734D029191FC1C9008D972D /* DJWActionSheet-Info.plist */,
+				3734D02A191FC1C9008D972D /* Images.xcassets */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -163,6 +155,17 @@
 				3734D023191FB6A8008D972D /* DJWActionSheet.m */,
 			);
 			path = DJWActionSheet;
+			sourceTree = "<group>";
+		};
+		3734D02D191FC1F5008D972D /* Example */ = {
+			isa = PBXGroup;
+			children = (
+				3734D02E191FC204008D972D /* DJWAppDelegate.h */,
+				3734D02F191FC204008D972D /* DJWAppDelegate.m */,
+				3734D030191FC204008D972D /* DJWViewController.h */,
+				3734D031191FC204008D972D /* DJWViewController.m */,
+			);
+			name = Example;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,9 +245,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0EBD66321875FD47007DC69E /* Images.xcassets in Resources */,
-				0EBD66241875FD47007DC69E /* InfoPlist.strings in Resources */,
-				0EBD662D1875FD47007DC69E /* Main.storyboard in Resources */,
+				3734D02B191FC1C9008D972D /* DJWActionSheet-Info.plist in Resources */,
+				3734D02C191FC1C9008D972D /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,9 +265,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0EBD66301875FD47007DC69E /* DJWViewController.m in Sources */,
-				0EBD662A1875FD47007DC69E /* DJWAppDelegate.m in Sources */,
-				0EBD66261875FD47007DC69E /* main.m in Sources */,
+				3734D028191FC1B6008D972D /* main.m in Sources */,
+				3734D032191FC204008D972D /* DJWAppDelegate.m in Sources */,
+				3734D033191FC204008D972D /* DJWViewController.m in Sources */,
 				3734D024191FB6A8008D972D /* DJWActionSheet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -289,22 +291,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		0EBD66221875FD47007DC69E /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0EBD66231875FD47007DC69E /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		0EBD662B1875FD47007DC69E /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0EBD662C1875FD47007DC69E /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		0EBD66411875FD47007DC69E /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -392,8 +378,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "DJWActionSheet/DJWActionSheet-Prefix.pch";
-				INFOPLIST_FILE = "DJWActionSheet/DJWActionSheet-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Example/Resources/DJWActionSheet-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5300F76D-1F63-48D7-8CDF-E7F8A105A6D4";
@@ -408,8 +393,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "DJWActionSheet/DJWActionSheet-Prefix.pch";
-				INFOPLIST_FILE = "DJWActionSheet/DJWActionSheet-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Example/Resources/DJWActionSheet-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5300F76D-1F63-48D7-8CDF-E7F8A105A6D4";
