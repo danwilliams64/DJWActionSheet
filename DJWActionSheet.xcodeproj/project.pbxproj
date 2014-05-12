@@ -16,7 +16,6 @@
 		0EBD66431875FD47007DC69E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0EBD66411875FD47007DC69E /* InfoPlist.strings */; };
 		0EBD66451875FD47007DC69E /* DJWActionSheetTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBD66441875FD47007DC69E /* DJWActionSheetTests.m */; };
 		3734D028191FC1B6008D972D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3734D027191FC1B6008D972D /* main.m */; };
-		3734D02B191FC1C9008D972D /* DJWActionSheet-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3734D029191FC1C9008D972D /* DJWActionSheet-Info.plist */; };
 		3734D02C191FC1C9008D972D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3734D02A191FC1C9008D972D /* Images.xcassets */; };
 		3734D032191FC204008D972D /* DJWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3734D02F191FC204008D972D /* DJWAppDelegate.m */; };
 		3734D033191FC204008D972D /* DJWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3734D031191FC204008D972D /* DJWViewController.m */; };
@@ -245,7 +244,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3734D02B191FC1C9008D972D /* DJWActionSheet-Info.plist in Resources */,
 				3734D02C191FC1C9008D972D /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
