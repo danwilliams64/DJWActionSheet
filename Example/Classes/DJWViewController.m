@@ -34,7 +34,7 @@
 
 - (IBAction)showActionSheetButtonTapped:(id)sender
 {
-    [DJWActionSheet showInView:self.view
+    [DJWActionSheet showInView:self.navigationController.view
                      withTitle:@"What would you like to do?"
              cancelButtonTitle:@"Cancel"
         destructiveButtonTitle:@"Delete"

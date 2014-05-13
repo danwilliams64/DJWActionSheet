@@ -126,7 +126,7 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
         return nil;
     }
     
-    self = [super initWithFrame:containerView.frame];
+    self = [super initWithFrame:containerView.bounds];
     if (self) {
         _title = title;
         _cancelButtonTitle = cancelButtonTitle;
@@ -136,7 +136,7 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
         _containerView = containerView;
         
         self.backgroundColor = [UIColor blackColor];
-        _containerSnapShotView = [containerView.window snapshotViewAfterScreenUpdates:NO];
+        _containerSnapShotView = [containerView snapshotViewAfterScreenUpdates:YES];
         [self addSubview:_containerSnapShotView];
         
         [_containerSnapShotView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cancelButtonTapped:)]];
@@ -149,10 +149,10 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
         _actionSheetBackgroundView = ({
             UIView *view = [[UIView alloc] initWithFrame:({
                 CGRect frame = self.bounds;
-                frame.size.width = CGRectGetWidth(containerView.frame);
+                frame.size.width = CGRectGetWidth(containerView.bounds);
                 frame.size.height = actionSheetHeight;
                 frame.origin.x = 0;
-                frame.origin.y = CGRectGetHeight(containerView.frame) - actionSheetHeight;
+                frame.origin.y = CGRectGetHeight(containerView.bounds) - actionSheetHeight;
                 frame;
             })];
             
@@ -167,7 +167,7 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
                 UILabel *label = [[UILabel alloc] initWithFrame:({
                     CGRect frame = CGRectZero;
                     CGFloat labelHeight = [self heightForActionSheetTitleLabel];
-                    frame = CGRectMake(DJWActionSheetHorizontalElementMargin, DJWActionSheetTopMargin, CGRectGetWidth(_actionSheetBackgroundView.frame) - (DJWActionSheetHorizontalElementMargin * 2), labelHeight);
+                    frame = CGRectMake(DJWActionSheetHorizontalElementMargin, DJWActionSheetTopMargin, CGRectGetWidth(_actionSheetBackgroundView.bounds) - (DJWActionSheetHorizontalElementMargin * 2), labelHeight);
                     frame;
                 })];
                 
@@ -287,7 +287,7 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
 - (UIView *)buttonDividerAtYPos:(CGFloat)yPos
 {
     return ({
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, yPos, CGRectGetWidth(self.containerView.frame) - (DJWActionSheetHorizontalElementMargin * 2), 1)];
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, yPos, CGRectGetWidth(self.containerView.bounds) - (DJWActionSheetHorizontalElementMargin * 2), 1)];
         view.backgroundColor = [DJWActionSheet DJWActionSheetDividerColor];
         view;
     });
@@ -347,7 +347,7 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
     self.actionSheetBackgroundView.frame = CGRectMake(CGRectGetMinX(self.actionSheetBackgroundView.frame), CGRectGetHeight(self.containerView.frame), CGRectGetWidth(self.actionSheetBackgroundView.frame), CGRectGetHeight(self.actionSheetBackgroundView.frame));
     self.cancelButton.frame = CGRectMake(CGRectGetMinX(self.cancelButton.frame), CGRectGetMinY(self.cancelButton.frame) + DJWActionSheetVerticalElementMargin * 15, CGRectGetWidth(self.cancelButton.frame), CGRectGetHeight(self.cancelButton.frame));
     
-    [view.window addSubview:self];
+    [self.containerView addSubview:self];
     
     [UIView animateWithDuration:DJWActionSheetPresentationAnimationSpeed delay:0 usingSpringWithDamping:0.6 initialSpringVelocity:0 options:0 animations:^{
         self.actionSheetBackgroundView.frame = actionSheetBackgroundViewEndFrame;
