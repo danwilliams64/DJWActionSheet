@@ -37,4 +37,4 @@ When the user has responded by tapping one of the buttons, the tapBlock is execu
 
 ## Installation
 
-Simply add `DJWActionSheet` to your Podfile if you're using Cocoapods. Alternatively, add `DJWActionSheet.h` and `DJWActionSheet.m` to your project.
+Simply add `DJWActionSheet` to your Podfile if you're using CocoaPods. Alternatively, add `DJWActionSheet.h` and `DJWActionSheet.m` to your project.
